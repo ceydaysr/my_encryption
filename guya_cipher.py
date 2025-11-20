@@ -8,23 +8,24 @@ plaintext= input("Şifrelemek istediğin metin nedir? ")
 
 plaintext_dizi= list(plaintext) 
 key_dizi= list(key)
-cipher_text= []
+ciphertext= [] #ciphertext için içi boş dizi oluşturdum
+alfabe = list("abcçdefgğhıijklmnoöprsştuüvyz") #alfabeyi tutan dizi oluşturdum
 
 key_mid_index= int(len(key_dizi)/2)   #anahtarın ortanca indisini tamsayı olarak buldum
 
-alfabe = list("abcçdefgğhıijklmnoöprsştuüvyz") #alfabeyi tutan dizi oluşturdum
 
-def alfabeden_indis_getir(x):
+def alfabeden_indis_getir(x):         #x'in alfabedeki  yerini döndürüyor
     for i in range (len(alfabe)) :
         if x==alfabe[i]:
             return i 
         
 def guya():
-    for i in range(len(plaintext_dizi)):
-        m=((alfabe(key_mid_index)-alfabeden_indis_getir(plaintext_dizi[i]))+29)%29
-        cipher_text.append(alfabe[m])
+    mid_of_key= key_dizi[key_mid_index]    #ortanca harfi tutuyorum HARF
+    for i in range(len(plaintext_dizi)):   #plain text boyutu kadar cipher text oluşturacak
+        m=((alfabeden_indis_getir(mid_of_key)-alfabeden_indis_getir(plaintext_dizi[i]))+29)%29 #şifreleme için oluşturduğum kısım ana işlem burası
+        ciphertext.append(alfabe[m])  #şifrelenmiş harfi bu listeye atıyorum 
 
 guya()
 
 print("işte sana özel şifrelenmiş metnin:")
-print(cipher_text)
+print("".join(ciphertext))
